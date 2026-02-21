@@ -27,9 +27,9 @@ export default function LoginPage() {
           <Image
             src="/weblogo.png"
             alt="Care360"
-            width={140}
-            height={40}
-            className="h-10 w-auto"
+            width={240}
+            height={72}
+            className="h-16 w-auto sm:h-20"
             priority
           />
         </Link>

@@ -40,8 +40,8 @@ export function Navbar({ children }: { children?: React.ReactNode }) {
             src="/weblogo.png"
             alt="Care360"
             width={200}
-            height={100}
-            // className="w-"
+            height={64}
+            className="h-12 w-auto sm:h-14"
             priority
           />
         </Link>

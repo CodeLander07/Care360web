@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 const userNavItems = [
   { href: "/dashboard/user", label: "Overview" },
+  { href: "/dashboard/user/chat", label: "AI Assistant" },
   { href: "/dashboard/user/heart-rate", label: "Heart Rate" },
   { href: "/dashboard/user/data", label: "My Data" },
   { href: "/dashboard/user/reports", label: "Reports" },
@@ -45,9 +46,9 @@ export function DashboardNav({ role }: { role: string }) {
           <Image
             src="/weblogo.png"
             alt="Care360"
-            width={100}
-            height={28}
-            className="h-7 w-auto"
+            width={160}
+            height={48}
+            className="h-12 w-auto"
           />
         </Link>
       </div>

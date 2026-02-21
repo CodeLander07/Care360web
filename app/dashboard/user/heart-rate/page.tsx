@@ -9,6 +9,13 @@ import { PpgWaveform } from "@/components/rppg/ppg-waveform";
 import { SignalQualityIndicator } from "@/components/rppg/signal-quality-indicator";
 import type { RppgHealthReport } from "@/lib/rppg/types";
 
+function getRecommendedDoctor(r: RppgHealthReport): string {
+  if (r.riskFlags?.includes("elevated_heart_rate") || r.riskFlags?.includes("low_heart_rate")) return "Cardiologist";
+  if (r.riskFlags?.includes("high_variability")) return "Cardiologist";
+  if (r.avgHeartRate > 90 || r.avgHeartRate < 55) return "Primary care physician";
+  return "No specialist referral suggested";
+}
+
 export default function HeartRatePage() {
   const [report, setReport] = useState<RppgHealthReport | null>(null);
   const [processedSignal, setProcessedSignal] = useState<number[]>([]);
@@ -44,6 +51,7 @@ export default function HeartRatePage() {
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
+      const recommended = getRecommendedDoctor(r);
       try {
         await supabase.from("rppg_sessions").insert({
           user_id: user.id,
@@ -51,7 +59,11 @@ export default function HeartRatePage() {
           signal_quality: r.signalQuality,
           beats_analyzed: r.beatsAnalyzed,
           confidence: r.confidence,
-          report: r,
+          report: { ...r, processedSignal: signal },
+          processed_signal: signal,
+          instantaneous_bpm: r.instantaneousBpm ?? [],
+          risk_flags: r.riskFlags ?? [],
+          recommended_doctor: recommended,
         });
       } catch {
         // Table may not exist yet
