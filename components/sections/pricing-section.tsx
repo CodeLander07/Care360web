@@ -82,7 +82,7 @@ export function PricingSection() {
   return (
     <section
       id="pricing"
-      className="relative w-full overflow-hidden bg-navy py-24 sm:py-32"
+      className="relative w-full overflow-hidden py-24 sm:py-32"
     >
       {/* Ambient glow - top right */}
       <div

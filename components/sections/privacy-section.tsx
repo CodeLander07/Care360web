@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function PrivacySection() {
   return (
-    <section id="privacy" className="relative w-full overflow-hidden bg-navy py-24 sm:py-32">
+    <section id="privacy" className="relative w-full overflow-hidden py-24 sm:py-32">
       {/* Subtle floating particles */}
       <div className="pointer-events-none absolute inset-0">
         {[...Array(16)].map((_, i) => (
@@ -109,7 +109,7 @@ export function PrivacySection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Patient privacy, uncompromised
+          Data-driven care, without friction.
         </motion.h2>
 
         {/* Supporting paragraph */}
@@ -120,10 +120,7 @@ export function PrivacySection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          We never compromise on data security. Every conversation is encrypted
-          end-to-end, with role-based access and audit trails built in. Designed
-          for HIPAA compliance and healthcare-grade requirements from the ground
-          up—so you can focus on care, not compliance.
+          Care360 AI analyzes vitals, symptoms, and historical records in real time—helping clinicians manage care efficiently and helping individuals stay proactive about their health. No complexity, no disconnected systems, just intelligent healthcare working in the background.
         </motion.p>
       </div>
     </section>

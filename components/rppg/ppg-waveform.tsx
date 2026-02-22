@@ -51,8 +51,8 @@ export function PpgWaveform({ signal, fps = 30 }: PpgWaveformProps) {
               border: "1px solid rgba(255,255,255,0.1)",
               borderRadius: "8px",
             }}
-            formatter={(v: number) => [v.toFixed(3), "Amplitude"]}
-            labelFormatter={(t) => `Time: ${t.toFixed(1)}s`}
+            formatter={(value) => [Number(value ?? 0).toFixed(3), "Amplitude"]}
+            labelFormatter={(time) => `Time: ${Number(time ?? 0).toFixed(1)}s`}
           />
           <Area
             type="monotone"

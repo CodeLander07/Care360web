@@ -1,22 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { TextGradient } from "@/components/ui/text-gradient";
+import { Button } from "@/components/ui/button";
 
 export function HealthcareHero() {
   const [activeTab, setActiveTab] = useState<"summary" | "transcript">("summary");
 
   return (
-    <section className="relative w-full min-h-[90vh] overflow-hidden bg-navy">
-      {/* Noise texture overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
+    <section className="relative w-full min-h-[90vh] overflow-hidden">
       {/* Soft star-like particles */}
       <div className="pointer-events-none absolute inset-0">
         {[...Array(24)].map((_, i) => (
@@ -54,21 +48,23 @@ export function HealthcareHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Natural conversation.
-            <br />
-            <TextGradient>AI handles the rest.</TextGradient>
+            From real-time health signals to smarter care decisions.
+           
           </motion.h1>
-          <motion.p
-            className="max-w-xl text-lg text-text-secondary sm:text-xl"
+          
+          <motion.div
+            className="flex flex-wrap gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Focus on the patient. Our AI silently captures every detail of the
-            visit—symptoms, concerns, and clinical findings—and generates
-            documentation in the background. No typing, no interruptions, just
-            human connection.
-          </motion.p>
+            <Button asChild variant="primary" size="lg">
+              <Link href="/signup">Get started</Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg">
+              <Link href="#how-it-works">See how it works</Link>
+            </Button>
+          </motion.div>
         </div>
 
         {/* Right: Mobile mockup - iPhone-style, medical-grade UI */}

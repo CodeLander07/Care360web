@@ -68,7 +68,7 @@ export function BpmFluctuationChart({
               border: "1px solid rgba(255,255,255,0.1)",
               borderRadius: "8px",
             }}
-            formatter={(v: number) => [v, "BPM"]}
+            formatter={(value) => [value ?? "—", "BPM"]}
             labelFormatter={(_, payload) =>
               payload?.[0] ? `Beat ${payload[0].payload.beat}` : ""
             }

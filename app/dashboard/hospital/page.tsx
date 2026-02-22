@@ -1,6 +1,9 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { GlassCard } from "@/components/ui/glass-card";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 export default async function HospitalDashboardPage() {
   const supabase = await createServerSupabaseClient();
@@ -19,10 +22,21 @@ export default async function HospitalDashboardPage() {
       <div className="p-8">
         <h1 className="mb-4 text-2xl font-semibold text-text-primary">Hospital Dashboard</h1>
         <GlassCard className="p-6">
-          <p className="text-text-secondary">No organization linked. Please complete your profile.</p>
+          <p className="mb-4 text-text-secondary">No organization linked. Register an organization to get started.</p>
+          <Link
+            href="/dashboard/hospital/register-organization"
+            className="inline-block rounded-full bg-teal px-5 py-2.5 text-sm font-medium text-white hover:bg-teal/90"
+          >
+            Register organization
+          </Link>
         </GlassCard>
       </div>
     );
+  }
+
+  const { data: doctors } = await supabase.from("doctors").select("id").eq("organization_id", orgId);
+  if (!doctors?.length) {
+    redirect("/dashboard/hospital/complete-profile");
   }
 
   const [patientsRes, appointmentsRes, prescriptionsRes, reportsRes] = await Promise.all([
@@ -67,6 +81,8 @@ export default async function HospitalDashboardPage() {
         <GlassCard className="p-6">
           <h2 className="mb-4 text-lg font-semibold text-text-primary">Quick links</h2>
           <div className="space-y-2">
+            <Link href="/dashboard/hospital/hospitals" className="block text-text-secondary hover:text-teal">Hospitals & doctors</Link>
+            <Link href="/dashboard/hospital/register-organization" className="block text-text-secondary hover:text-teal">Register organization</Link>
             <Link href="/dashboard/hospital/patients" className="block text-text-secondary hover:text-teal">View patients</Link>
             <Link href="/dashboard/hospital/appointments" className="block text-text-secondary hover:text-teal">Appointment requests</Link>
             <Link href="/dashboard/hospital/prescriptions" className="block text-text-secondary hover:text-teal">Prescriptions</Link>

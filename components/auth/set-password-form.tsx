@@ -59,12 +59,18 @@ export function SetPasswordForm({ nextPath, isRecovery = false }: { nextPath: st
       setMessage(error.message);
       return;
     }
+    // Update profile: role (for new users), has_password (stops middleware redirect), last_login
+    const profileUpdate: { role?: string; has_password: boolean; last_login: string } = {
+      has_password: true,
+      last_login: new Date().toISOString(),
+    };
     if (!isRecovery && role) {
-      await supabase
-        .from("profiles")
-        .update({ role: role === "hospital_admin" ? "hospital_admin" : "patient" })
-        .eq("id", user.id);
+      profileUpdate.role = role === "hospital_admin" ? "hospital_admin" : "patient";
     }
+    await supabase
+      .from("profiles")
+      .update(profileUpdate)
+      .eq("id", user.id);
     if (!isRecovery && role === "hospital_admin" && orgName.trim()) {
       const { data: org } = await supabase
         .from("organizations")
@@ -78,11 +84,11 @@ export function SetPasswordForm({ nextPath, isRecovery = false }: { nextPath: st
           .eq("id", user.id);
       }
     }
-    await supabase
-      .from("profiles")
-      .update({ last_login: new Date().toISOString() })
-      .eq("id", user.id);
-    router.push(nextPath);
+    if (!isRecovery && role === "hospital_admin") {
+      router.push("/dashboard/hospital/complete-profile");
+    } else {
+      router.push(nextPath);
+    }
     router.refresh();
   };
 

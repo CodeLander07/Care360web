@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function ClosingSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-navy px-6 py-24 sm:py-32">
+    <section className="relative w-full overflow-hidden px-6 py-24 sm:py-32">
       {/* Soft blue-green gradient orbs for lighting */}
       <div className="pointer-events-none absolute inset-0">
         <div
@@ -39,10 +39,10 @@ export function ClosingSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            Care the way it was meant to be.
+            Smarter signals. Better decisions. Connected care.
             <br />
             <span className="text-text-secondary">
-              Documentation that keeps up. Focus that never fades.
+              Care360 AI brings together health monitoring, intelligence, and healthcare management—so care never stops, and insight never fades.
             </span>
           </motion.p>
         </motion.div>

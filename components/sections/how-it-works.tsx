@@ -7,7 +7,7 @@ export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative w-full overflow-hidden bg-navy py-28 sm:py-36"
+      className="relative w-full overflow-hidden py-28 sm:py-36"
     >
       {/* Layer 1: Base - very dark navy / near-black */}
       <div
@@ -44,7 +44,7 @@ export function HowItWorks() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          The conversation flows. The AI listens.
+          Healthcare that listens, learns, and responds.
         </motion.h2>
 
         {/* Supporting paragraph - lower contrast, more spacing */}
@@ -55,10 +55,7 @@ export function HowItWorks() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Ambient intelligence runs in the background—capturing context,
-          extracting clinical details, and structuring documentation without
-          interrupting the visit. No prompts, no commands. Just the natural
-          rhythm of care.
+          We continuously capture health signals, clinical inputs, and operational data to identify trends, detect anomalies, and support timely decisions—whether you&apos;re a patient, clinician, or healthcare provider.
         </motion.p>
       </div>
     </section>

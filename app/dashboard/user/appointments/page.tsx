@@ -1,37 +1,82 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { GlassCard } from "@/components/ui/glass-card";
+import { ConsultancyListing } from "@/components/consultancy/consultancy-listing";
+
+type OrganizationSummary = { name: string; type: string };
+
+type DoctorItem = {
+  id: string;
+  name: string;
+  specialization: string;
+  experience_years: number;
+  bio: string | null;
+  avatar_url: string | null;
+  fee_per_min: number | null;
+  rating: number;
+  sessions_count: number;
+  is_online: boolean;
+  services: string[] | null;
+  organization_id: string;
+  organizations: OrganizationSummary | null;
+};
+
+type AppointmentItem = {
+  id: string;
+  scheduled_at: string;
+  status: string;
+  notes: string | null;
+  type: string;
+  organizations: OrganizationSummary | null;
+};
 
 export default async function UserAppointmentsPage() {
   const supabase = await createServerSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data: appointments } = await supabase
-    .from("appointments")
-    .select("id, scheduled_at, status, notes")
-    .eq("patient_id", user.id)
-    .order("scheduled_at", { ascending: true });
+  const [doctorsRes, apptsRes] = await Promise.all([
+    supabase
+      .from("doctors")
+      .select(`
+        id, name, specialization, experience_years, bio, avatar_url,
+        fee_per_min, rating, sessions_count, is_online, services, organization_id,
+        organizations (name, type)
+      `)
+      .order("sessions_count", { ascending: false }),
+    supabase
+      .from("appointments")
+      .select(`
+        id, scheduled_at, status, notes, type,
+        organizations (name, type)
+      `)
+      .eq("patient_id", user.id)
+      .order("scheduled_at", { ascending: false }),
+  ]);
+
+  const doctors: DoctorItem[] = (doctorsRes.data ?? []).map((doctor) => ({
+    ...doctor,
+    organizations: Array.isArray(doctor.organizations)
+      ? (doctor.organizations[0] ?? null)
+      : (doctor.organizations ?? null),
+  }));
+
+  const appointments: AppointmentItem[] = (apptsRes.data ?? []).map((appointment) => ({
+    ...appointment,
+    organizations: Array.isArray(appointment.organizations)
+      ? (appointment.organizations[0] ?? null)
+      : (appointment.organizations ?? null),
+  }));
 
   return (
     <div className="p-8">
-      <h1 className="mb-6 text-2xl font-semibold text-text-primary">Appointments</h1>
-      <div className="space-y-4">
-        {appointments?.length ? (
-          appointments.map((a) => (
-            <GlassCard key={a.id} className="p-6">
-              <p className="font-medium text-text-primary">
-                {new Date(a.scheduled_at).toLocaleString()}
-              </p>
-              <p className="mt-1 text-sm text-text-muted">Status: {a.status}</p>
-              {a.notes && <p className="mt-2 text-sm text-text-secondary">{a.notes}</p>}
-            </GlassCard>
-          ))
-        ) : (
-          <GlassCard className="p-8">
-            <p className="text-text-secondary">No appointments scheduled.</p>
-          </GlassCard>
-        )}
-      </div>
+      <h1 className="mb-2 text-2xl font-semibold text-text-primary">
+        Consultancy
+      </h1>
+      <p className="mb-6 text-sm text-text-muted">
+        Browse doctors and clinics, schedule appointments, and manage your bookings.
+      </p>
+
+      <ConsultancyListing doctors={doctors} appointments={appointments} />
     </div>
   );
 }

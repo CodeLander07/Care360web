@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-navy">
+    <footer className="border-t border-white/[0.06]">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-8 sm:flex-row sm:gap-8">
         {/* Logo */}
         <Link

@@ -12,13 +12,16 @@ const userNavItems = [
   { href: "/dashboard/user/heart-rate", label: "Heart Rate" },
   { href: "/dashboard/user/data", label: "My Data" },
   { href: "/dashboard/user/reports", label: "Reports" },
-  { href: "/dashboard/user/appointments", label: "Appointments" },
+  { href: "/dashboard/user/appointments", label: "Consultancy" },
+  { href: "/dashboard/user/prescriptions", label: "Prescriptions" },
   { href: "/dashboard/user/reminders", label: "Reminders" },
   { href: "/dashboard/user/drugs", label: "Drug Recommendations" },
 ];
 
 const hospitalNavItems = [
   { href: "/dashboard/hospital", label: "Overview" },
+  { href: "/dashboard/hospital/hospitals", label: "Hospitals & Doctors" },
+  { href: "/dashboard/hospital/register-organization", label: "Register organization" },
   { href: "/dashboard/hospital/patients", label: "Patients" },
   { href: "/dashboard/hospital/appointments", label: "Appointments" },
   { href: "/dashboard/hospital/prescriptions", label: "Prescriptions" },
@@ -46,9 +49,9 @@ export function DashboardNav({ role }: { role: string }) {
           <Image
             src="/weblogo.png"
             alt="Care360"
-            width={160}
-            height={48}
-            className="h-12 w-auto"
+            width={256}
+            height={72}
+            priority
           />
         </Link>
       </div>

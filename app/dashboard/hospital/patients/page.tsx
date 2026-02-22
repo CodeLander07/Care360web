@@ -1,6 +1,8 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { GlassCard } from "@/components/ui/glass-card";
 
+export const dynamic = "force-dynamic";
+
 export default async function HospitalPatientsPage() {
   const supabase = await createServerSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -36,7 +38,10 @@ export default async function HospitalPatientsPage() {
 
   return (
     <div className="p-8">
-      <h1 className="mb-6 text-2xl font-semibold text-text-primary">Patients Connected</h1>
+      <h1 className="mb-2 text-2xl font-semibold text-text-primary">Patients Connected</h1>
+      <p className="mb-6 text-sm text-text-muted">
+        Patients who have booked an appointment with your organization.
+      </p>
       <div className="space-y-4">
         {patients?.length ? (
           patients.map((p) => (

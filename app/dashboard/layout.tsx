@@ -24,7 +24,7 @@ export default async function DashboardLayout({
   const isHospitalAdmin = role === "hospital_admin" || role === "admin";
 
   return (
-    <div className="flex min-h-screen bg-navy">
+    <div className="flex min-h-screen">
       <DashboardNav role={role} />
       <main className="flex-1 overflow-auto">
         {children}

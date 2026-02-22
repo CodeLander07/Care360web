@@ -35,8 +35,8 @@ export function LoginForm() {
         .update({ last_login: new Date().toISOString() })
         .eq("id", data.user.id);
     }
-    const next = searchParams.get("redirect") || "/dashboard";
-    router.push(next);
+    const redirectTo = searchParams.get("redirect") || "/dashboard";
+    router.push(redirectTo.startsWith("/") ? redirectTo : "/dashboard");
     router.refresh();
   };
 

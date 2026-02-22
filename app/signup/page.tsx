@@ -4,20 +4,7 @@ import { SignupForm } from "@/components/auth/signup-form";
 
 export default function SignupPage() {
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-navy px-6 py-12">
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(8, 20, 28, 1) 0%, rgba(15, 36, 53, 1) 50%, rgba(12, 28, 40, 1) 100%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
-      />
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-12">
       <div className="relative z-10 w-full max-w-md">
         <Link
           href="/"
@@ -26,9 +13,8 @@ export default function SignupPage() {
           <Image
             src="/weblogo.png"
             alt="Care360"
-            width={240}
+            width={256}
             height={72}
-            className="h-16 w-auto sm:h-20"
             priority
           />
         </Link>
@@ -45,7 +31,7 @@ export default function SignupPage() {
             Create your account
           </h1>
           <p className="mt-2 text-center text-sm text-text-muted">
-            Enter your email and we&apos;ll send you a verification link
+            Enter your email and we&apos;ll send a verification link. Click it to create your password and select your role (Patient or Clinic).
           </p>
           <SignupForm />
         </div>

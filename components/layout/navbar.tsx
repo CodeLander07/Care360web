@@ -28,20 +28,19 @@ export function Navbar({ children }: { children?: React.ReactNode }) {
         className="pointer-events-none absolute inset-0 opacity-[0.02]"/>
 
       <nav
-        className="relative mx-auto flex h-16 items-center justify-between px-6 lg:h-16 lg:px-8"
+        className="relative mx-auto flex h-20 items-center justify-between px-6 lg:h-20 lg:px-8"
         aria-label="Main navigation"
       >
         {/* Left: Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2"
+          className="flex items-center"
         >
           <Image
             src="/weblogo.png"
             alt="Care360"
-            width={200}
-            height={64}
-            className="h-12 w-auto sm:h-14"
+            width={256}
+            height={72}
             priority
           />
         </Link>

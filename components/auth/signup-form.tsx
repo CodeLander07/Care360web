@@ -24,7 +24,7 @@ export function SignupForm() {
       return;
     }
     setStatus("success");
-    setMessage("Check your email for the verification link.");
+    setMessage("Check your email for the verification link. Click it to create your password and select your role.");
   };
 
   return (
